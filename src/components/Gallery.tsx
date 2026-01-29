@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 
 const galleryImages = [
@@ -15,8 +13,6 @@ const galleryImages = [
 ];
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-
   return (
     <section id="gallery" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -34,8 +30,7 @@ const Gallery = () => {
             {galleryImages.map((image) => (
               <Card
                 key={image.id}
-                className="overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300"
-                onClick={() => setSelectedImage(image.id)}
+                className="overflow-hidden group hover:shadow-xl transition-all duration-300"
               >
                 <div className="aspect-square bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 flex items-center justify-center relative">
                   <Icon 
@@ -51,19 +46,6 @@ const Gallery = () => {
               </Card>
             ))}
           </div>
-
-          <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-            <DialogContent className="max-w-4xl">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center rounded-lg">
-                <Icon name="Image" size={120} className="text-primary/30" />
-              </div>
-              {selectedImage && (
-                <p className="text-center text-lg font-medium mt-4">
-                  {galleryImages.find(img => img.id === selectedImage)?.title}
-                </p>
-              )}
-            </DialogContent>
-          </Dialog>
         </div>
       </div>
     </section>
